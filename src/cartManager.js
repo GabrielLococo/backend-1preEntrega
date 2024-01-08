@@ -13,5 +13,27 @@ export class CartManager {
        return responseJSON
     }
 
+    getCartProducts = async (id) => {
+        const carts = await this.getCarts()
+        const cart = carts.find(cart => cart.id === id)
+
+        if(cart){
+            return cart.products
+        }else {
+            console.log('carrito no encontrado')
+        }
+    }
+
+    newCart = async () => {
+        const id = uuidv4()
+
+        const newCart = {id,products: []}
+        
+        this.carts = await this.getCarts()
+        this.carts.push(newCart)
+
+        await fs.writeFile(this.path,JSON.stringify(this.carts))
+        return newCart
+    }
 
 }
