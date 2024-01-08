@@ -42,7 +42,7 @@ export class CartManager {
 
         if(index !== -1){
             const cartProducts = await this.getCartProducts(cart_id)
-            const existingProductIndex = cartProducts.findIndex(product => product.product_id === product_i)
+            const existingProductIndex = cartProducts.findIndex(product => product.product_id === product_id)
             
             if(existingProductIndex !== -1){
                 cartProducts[existingProductIndex].quantity = cartProducts[existingProductIndex].quantity + 1
