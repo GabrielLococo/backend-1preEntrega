@@ -1,17 +1,17 @@
 import { Router } from "express";
 import { productManager } from "../app.js";
+
+
 const productsRouter = Router()
 
 
-
-
 // http://localhost/8080/api/products
-productsRouter.get('/',async (req, res) =>{
+productsRouter.get('/', async (req, res) => {
     try {
-        const {limit} = req.query
+        const { limit } = req.query
         const products = await productManager.getProducts()
 
-        if(limit) {
+        if (limit) {
             const limitedProducts = products.slice(0, limit)
             return res.json(limitedProducts)
         }
@@ -21,11 +21,11 @@ productsRouter.get('/',async (req, res) =>{
         console.log(error)
         res.send('error al intentar recibir los productos')
     }
-} )
+})
 
-productsRouter.get('/:pid', async (req,res) => {
+productsRouter.get('/:pid', async (req, res) => {
     try {
-        const {pid} = req.params
+        const { pid } = req.params
         const products = await productManager.getProductsById(pid)
         res.json(products)
     } catch (error) {
@@ -34,10 +34,10 @@ productsRouter.get('/:pid', async (req,res) => {
     }
 })
 
-productsRouter.post('/', async(req,res) => {
+productsRouter.post('/', async (req, res) => {
     try {
-        const {title, description, code, price, status, stock, category, thumbnail} = req.body
-        const response = await productManager.addProduct({title, description, code, price, status, stock, category, thumbnail})
+        const { title, description, code, price, status, stock, category, thumbnail } = req.body
+        const response = await productManager.addProduct({ title, description, code, price, status, stock, category, thumbnail })
         res.json(response)
     } catch (error) {
         console.log(error)
@@ -45,13 +45,13 @@ productsRouter.post('/', async(req,res) => {
     }
 })
 
-productsRouter.put('/:pid' , async (req, res) => {
+productsRouter.put('/:pid', async (req, res) => {
 
-    const {pid} = req.params
+    const { pid } = req.params
 
     try {
-        const {title, description, code, price, status, stock, category, thumbnail} = req.body
-        const response = await productManager.updateProduct(pid, {title, description, code, price, status, stock, category, thumbnail} )
+        const { title, description, code, price, status, stock, category, thumbnail } = req.body
+        const response = await productManager.updateProduct(pid, { title, description, code, price, status, stock, category, thumbnail })
         res.json(response)
     } catch (error) {
         console.log(error)
@@ -60,8 +60,8 @@ productsRouter.put('/:pid' , async (req, res) => {
 })
 
 
-productsRouter.delete('/:pid',async (req, res) => {
-    const {pid} = req.params
+productsRouter.delete('/:pid', async (req, res) => {
+    const { pid } = req.params
     try {
         await productManager.deleteProduct(pid)
         res.send('producto eliminado exitosamente')
@@ -73,4 +73,4 @@ productsRouter.delete('/:pid',async (req, res) => {
 
 
 
-export {productsRouter}
+export { productsRouter }

@@ -1,13 +1,17 @@
 import {promises as fs} from 'fs'
-import pkg from 'uuidv4';
-const {v4: uuidv4} = pkg;
+//import {v4 as uuidv4} from 'uuid' 
+   // tuve que cambiar esta linea por las siguientes lienas : "4,5" no entendí bien por qué. 
+import pkg from 'uuidv4'
+const {v4: uuidv4} = pkg
+
+
 
 export class CartManager {
     constructor(){
         this.path = 'cart.json'
         this.carts = []
     }
-
+ 
     getCarts = async () => {
        const response =  await fs.readFile(this.path, 'utf-8')
        const responseJSON = JSON.parse(response)
