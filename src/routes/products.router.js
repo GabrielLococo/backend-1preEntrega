@@ -9,7 +9,7 @@ const productsRouter = Router()
 productsRouter.get('/', async (req, res) => {
     try {
         const { limit } = req.query
-        const products = await productManager.getProducts
+        const products = await productManager.getProducts()
 
         if (limit) {
             const limitedProducts = products.slice(0, limit)
