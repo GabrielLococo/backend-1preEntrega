@@ -23,3 +23,15 @@ cartsRouter.get('/:cid', async (req, res) => {
         res.send('error al intentar enviar los productos del carrito')
     }
 })
+
+cartsRouter.post('/:cid/products/:pid', async (req, res) => {
+    const {cid, pid} = req.params
+    try {
+        await cartManager.addProductToCart(cid, pid)
+        res.send('producto agregado exitosamente')
+    } catch (error) {
+        res.send('error al intentar guardar producto en el carrito ')
+    }
+})
+
+export {cartsRouter}
